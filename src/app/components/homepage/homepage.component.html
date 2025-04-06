@@ -1,6 +1,14 @@
-<section class="results">
-    <app-pokemon-card
-        *ngFor="let pokemon of pokemons"
-        [pokemon]="pokemon">
-    </app-pokemon-card>
-</section>
+<div class="pokedex-homepage">
+	<div class="navigation">
+	  <button (click)="prevPage()" [disabled]="currentOffset === 0"><img src="/arrow-left-svgrepo-com.svg" alt="Back" class="icon"> Prev</button>
+	  <button (click)="nextPage()">Next <img src="/arrow-right-svgrepo-com.svg" alt="Back" class="icon"></button>
+	</div>
+  
+	<div class="pokedex-scroll">
+	  <app-pokemon-card
+		*ngFor="let pokemon of pokemons"
+		[pokemon]="pokemon">
+	  </app-pokemon-card>
+	</div>
+  </div>
+  

@@ -5,20 +5,38 @@ import { type PokemonModel } from '../../model/pokemon-model';
 import { CommonModule } from '@angular/common';
 
 @Component({
-  selector: 'app-homepage',
-  imports: [PokemonCardComponent, CommonModule],
-  templateUrl: './homepage.component.html',
-  styleUrl: './homepage.component.scss'
+	selector: 'app-homepage',
+	imports: [PokemonCardComponent, CommonModule],
+	templateUrl: './homepage.component.html',
+	styleUrl: './homepage.component.scss'
 })
 export class HomepageComponent {
-  pokemons: PokemonModel[] = [];
-  pokemonService: PokemonService = inject(PokemonService) // maiuscole DECORATOR minuscole FUNZIONI
+	pokemons: PokemonModel[] = [];
+	currentOffset: number = 0;
+	limit: number = 20;
 
-  constructor() {
-    this.pokemonService.getPokemonData().then(pok => {
-      console.log(pok);
-      this.pokemons = pok;
-    })
-  }
+	pokemonService: PokemonService = inject(PokemonService);
 
+	constructor() {
+		this.loadPage();
+	}
+
+	loadPage(): void {
+		this.pokemonService.getPokemonPage(this.currentOffset, this.limit).then(pok => {
+			this.pokemons = pok;
+		});
+	}
+
+	nextPage(): void {
+		this.currentOffset += this.limit;
+		this.loadPage();
+	}
+
+	prevPage(): void {
+		if (this.currentOffset >= this.limit) {
+			this.currentOffset -= this.limit;
+			this.loadPage();
+		}
+	}
 }
+

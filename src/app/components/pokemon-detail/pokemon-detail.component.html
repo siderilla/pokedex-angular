@@ -1,1 +1,26 @@
-<p>pokemon-detail works!</p>
+<div class="pokedex-detail">
+	<button class="back-button" routerLink="/">
+		<img src="/arrow-left-svgrepo-com.svg" alt="Back" class="icon">
+		Back to Pokédex
+	  </button>	  
+	<div class="pokedex-header">
+		<h1>{{ pokemon.name | uppercase }}</h1>
+	</div>
+
+	<div class="pokedex-main">
+		<div class="sprite-box">
+			<img [src]="pokemon.sprites.front_default" [alt]="pokemon.name">
+		</div>
+
+		<div class="info-box">
+			<p><strong>Height:</strong> {{ pokemon.height }}</p>
+			<p><strong>Weight:</strong> {{ pokemon.weight }}</p>
+			<p><strong>Base XP:</strong> {{ pokemon.base_experience }}</p>
+			<p><strong>Type:</strong> {{ getTypes() }}</p>
+		</div>
+	</div>
+
+	<div class="pokedex-footer">
+		<p></p>
+	</div>
+</div>
